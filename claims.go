@@ -58,9 +58,11 @@ func (c StandardClaims) Valid() error {
 	return vErr
 }
 
-// Extracts an array of audience values from the aud field.
+// ExtractAudience extracts an array of audience values from the aud field.
 func ExtractAudience(c *StandardClaims) []string {
 	switch c.Audience.(type) {
+	case nil:
+		return []string{}
 	case []interface{}:
 		auds := make([]string, len(c.Audience.([]interface{})))
 		for i, value := range c.Audience.([]interface{}) {
@@ -74,7 +76,7 @@ func ExtractAudience(c *StandardClaims) []string {
 	}
 }
 
-// Compares the aud claim against cmp.
+// VerifyAudience compares the aud claim against cmp.
 // If required is false, this method will return true if the value matches or is unset
 func (c *StandardClaims) VerifyAudience(cmp string, req bool) bool {
 	audiences := ExtractAudience(c)

@@ -37,8 +37,17 @@ var claimWithAudience = []StandardClaims{
 	},
 }
 
-// Test StandardClaims instances with no aduences within empty []string and []interface{} collections.
+// Test StandardClaims instances with no audiences within empty []string and []interface{} collections.
 var claimWithoutAudience = []StandardClaims{
+	{
+		nil,
+		123123,
+		"Id",
+		12312,
+		"Issuer",
+		12312,
+		"Subject",
+	},
 	{
 		[]string{},
 		123123,
